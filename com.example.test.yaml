@@ -1,0 +1,26 @@
+id: com.example.test
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: test
+
+finish-args:
+  - --share=ipc
+  - --device=dri
+  - --socket=wayland
+  - --socket=fallback-x11
+
+modules:
+
+  - name: libportal
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/flatpak/libportal
+        tag: 0.9.0
+    modules:
+      - name: test
+        buildsystem: meson
+        sources:
+          - type: dir
+            path: .
